@@ -46,7 +46,7 @@ public class AudioManager : MonoBehaviour
     }
     public void StopGame()
     {
-        audioSources[1].Stop();
+        audioSources[1].DOFade(vol, duration).OnComplete(() => audioSources[1].Stop());
     }
 
     public void PlayResult()
@@ -55,6 +55,40 @@ public class AudioManager : MonoBehaviour
     }
     public void StopResult()
     {
-        audioSources[2].Stop();
+        audioSources[2].DOFade(vol, duration).OnComplete(() => audioSources[2].Stop());
+    }
+
+    public void PlayCurrentSceneBGM( string sceneName)
+    {
+        switch (sceneName)
+        {
+            case "Title":
+                PlayTitle();
+                break;
+            case "Main":
+                PlayGame();
+                break;
+            case "Result":
+                PlayResult();
+                break;
+        }
+    }
+
+    public void StopCurrentSceneBGM(string sceneName)
+    {
+        switch (sceneName)
+        {
+            case "Title":
+                StopTitle();
+                break;
+            case "Main":
+                StopGame();
+                break;
+            case "Result":
+                StopResult();
+                break;
+            default:
+                break;
+        }
     }
 }

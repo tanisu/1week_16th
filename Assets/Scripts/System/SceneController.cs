@@ -23,45 +23,24 @@ public class SceneController : MonoBehaviour
 
     private void Start()
     {
-        currentSceneName = SceneManager.GetActiveScene().name;
-        _switchBGM(currentSceneName);
+        currentSceneName = GetCurrentScene();
+        AudioManager.I.PlayCurrentSceneBGM(currentSceneName);
+    }
+
+    public string GetCurrentScene()
+    {
+        return SceneManager.GetActiveScene().name;
     }
 
     public void ChangeScene(string sceneName)
     {
-        _switchBGM(sceneName, currentSceneName);
+        FadeManager.I.FadeOI(() =>  _sceneTo(sceneName));
+    }
+
+    private void _sceneTo(string sceneName)
+    {
         SceneManager.LoadScene(sceneName);
     }
 
-    private void _switchBGM(string sceneName,string stopSceneName = "")
-    {
-        Debug.Log(stopSceneName);
-        switch (stopSceneName)
-        {
-            case "Title":
-                AudioManager.I.StopTitle();
-                break;
-            case "Main":
-                AudioManager.I.StopGame();
-                break;
-            case "Result":
-                AudioManager.I.StopResult();
-                break;
-            default:
-                break;
-        }
 
-        switch (sceneName)
-        {
-            case "Title":
-                AudioManager.I.PlayTitle();
-                break;
-            case "Main":
-                AudioManager.I.PlayGame();
-                break;
-            case "Result":
-                AudioManager.I.PlayResult();
-                break;
-        }
-    }
 }

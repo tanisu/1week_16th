@@ -24,7 +24,15 @@ public class SceneController : MonoBehaviour
     private void Start()
     {
         currentSceneName = GetCurrentScene();
+        StartCoroutine(_initCurrentStage());
+        
+    }
+
+    private IEnumerator _initCurrentStage()
+    {
+        yield return new WaitForSeconds(0.01f);
         AudioManager.I.PlayCurrentSceneBGM(currentSceneName);
+        GameManager.I.ChangeState(currentSceneName);
     }
 
     public string GetCurrentScene()

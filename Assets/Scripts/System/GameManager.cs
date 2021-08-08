@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        SceneController.I.SetScore(clothCount);
         gameState = GameState.PLAY;
     }
 
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour
         }
         if(gameState == GameState.GAMEOVER && !isGameOver)
         {
-            
+            SceneController.I.SetScore(clothCount);
             isGameOver = true;
             SceneController.I.ChangeScene("Result");
         }

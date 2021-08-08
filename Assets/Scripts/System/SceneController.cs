@@ -7,6 +7,7 @@ public class SceneController : MonoBehaviour
     public static SceneController I { get; private set; }
 
     string currentSceneName;
+    int score = 0;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class SceneController : MonoBehaviour
 
     private void Start()
     {
+
         currentSceneName = GetCurrentScene();
         StartCoroutine(_initCurrentStage());
         
@@ -42,6 +44,11 @@ public class SceneController : MonoBehaviour
     public void ChangeScene(string sceneName)
     {
         FadeManager.I.FadeOI(() =>  _sceneTo(sceneName));
+    }
+
+    public void SetScore(int clothCount)
+    {
+        score = clothCount;
     }
 
     private void _sceneTo(string sceneName)

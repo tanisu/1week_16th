@@ -32,7 +32,6 @@ public class SceneController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.01f);
         AudioManager.I.PlayCurrentSceneBGM(currentSceneName);
-        GameManager.I.ChangeState(currentSceneName);
     }
 
     public string GetCurrentScene()

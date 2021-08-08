@@ -15,7 +15,7 @@ public class UIController : MonoBehaviour
     {
         if((slider.maxValue - time) < 0)
         {
-            //SceneController.I.ChangeScene("Result");
+            GameManager.I.ChangeState(GameState.GAMEOVER);
             return;
         }
         slider.value = slider.maxValue - time;

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private int clothCount = 0;
     private float time;
     private GameState gameState;
+    private bool isGameOver = false;
     
     private void Awake()
     {
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+        gameState = GameState.PLAY;
     }
 
     private void Update()
@@ -35,6 +36,13 @@ public class GameManager : MonoBehaviour
         {
             ui.UpdateSlider(_counter());
         }
+        if(gameState == GameState.GAMEOVER && !isGameOver)
+        {
+            
+            isGameOver = true;
+            SceneController.I.ChangeScene("Result");
+        }
+
     }
 
     public void GetCloth()
@@ -46,21 +54,9 @@ public class GameManager : MonoBehaviour
         clothCount--;
     }
 
-    public void ChangeState(string sceneName)
+    public void ChangeState(GameState state)
     {
-        switch (sceneName)
-        {
-            case "Title":
-                gameState = GameState.STOP;
-                break;
-            case "Main":
-                gameState = GameState.PLAY;
-                break;
-            case "Result":
-                gameState = GameState.GAMEOVER;
-                break;
-        }
-        Debug.Log(gameState);
+        gameState = state;
     }
 
     private int _counter()

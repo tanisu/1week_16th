@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayTitle()
     {
+        audioSources[0].volume = 1;
         audioSources[0].Play();
     }
 
@@ -42,6 +43,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayGame()
     {
+        audioSources[1].volume = 1;
         audioSources[1].Play();
     }
     public void StopGame()
@@ -51,6 +53,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayResult()
     {
+        audioSources[2].volume = 1;
         audioSources[2].Play();
     }
     public void StopResult()

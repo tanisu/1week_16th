@@ -23,7 +23,7 @@ public class BoundClothesController : MonoBehaviour
         }
 
         //上下に跳ねる
-        this.GetComponent<Transform>().DOMoveY(verticalEndPoint, verticalDuration).SetEase(Ease.InSine).SetLoops(-1, LoopType.Yoyo).SetLink(gameObject);
+        this.GetComponent<Transform>().DOMoveY(verticalEndPoint, verticalDuration).SetEase(Ease.OutFlash).SetLoops(-1, LoopType.Yoyo).SetLink(gameObject);
     }
 
     // Update is called once per frame

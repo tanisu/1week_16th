@@ -17,18 +17,35 @@ public class ClothesGenerator : MonoBehaviour
         this.delta += Time.deltaTime;
         if(this.delta > this.span)
         {
-            //generateDiceが5以上の時に服を生成（出現頻度をバラけさせるため）
+
             int generateDice;
             generateDice = Random.Range(0, 11);
-            if(generateDice >= 5)
+
+            //generateDiceが1 ~ 5の時に落ちる服を生成
+            if (generateDice < 6)
             {
-                //服を生成
-                this.delta = 0;
                 clothes = Instantiate(fallClothesPrefab) as GameObject;
 
                 //ランダムな場所に生成
                 float x = Random.Range(-7.7f, 7.7f);
                 clothes.transform.position = new Vector2(x, 6f);
+            }
+            else if(generateDice >= 6 && generateDice < 11)　//generateDiceが6 ~ 10の時に跳ねる服を生成
+            {
+                //跳ねる服を生成
+                clothes = Instantiate(boundeClothesPrefab) as GameObject;
+
+                //左右ランダムな場所に生成
+                int i = Random.Range(0, 2);
+                float x = Random.Range(10f, 16f);
+                if(i == 0)
+                {
+                    clothes.transform.position = new Vector2(x, -3.5f);
+                }
+                else if(i == 1)
+                {
+                    clothes.transform.position = new Vector2(-x, -3.5f);
+                }
             }
             delta = 0;
         }

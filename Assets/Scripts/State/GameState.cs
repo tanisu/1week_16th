@@ -2,7 +2,5 @@ public enum GameState
 {
     STOP,
     PLAY,
-    GAMEOVER,
-    PAUSE
-    
+    GAMEOVER
 }

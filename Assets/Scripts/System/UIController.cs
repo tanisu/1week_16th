@@ -2,23 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 
 public class UIController : MonoBehaviour
 {
 
     [SerializeField] Text clothesText;
-    [SerializeField] Slider slider;
+    [SerializeField] Slider hpSlider;
+    [SerializeField] Image timerImage;
 
 
-    public void UpdateSlider(int time)
+    public void UpdateHPSlider(int time)
     {
-        if((slider.maxValue - time) < 0)
+        if((hpSlider.maxValue - time) < 0)
         {
-            GameManager.I.ChangeState(GameState.GAMEOVER);
             return;
         }
-        slider.value = slider.maxValue - time;
+        hpSlider.value = hpSlider.maxValue - time;
 
+    }
+
+    public void UpdateText(int clothCount)
+    {
+        clothesText.text = $"•žF{clothCount}–‡";
+    }
+
+    public void UpdateTimer(float timer)
+    {
+        timerImage.DOFillAmount(timer, 0.1f).SetEase(Ease.Linear).SetLink(timerImage.gameObject);
     }
 }

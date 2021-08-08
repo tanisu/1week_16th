@@ -5,19 +5,21 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] UIController ui;
-    
+    [SerializeField] float playTime;
     public static GameManager I;
     private int clothCount = 0;
-    private float time;
+    private float hp;
     private GameState gameState;
     private bool isGameOver = false;
+    private float seconds = 0f;
+    private float startTime = 1.0f;
+
     
     private void Awake()
     {
         if (I == null)
         {
-            I = this;
-           // DontDestroyOnLoad(gameObject);
+            I = this;           
         }
         else
         {
@@ -34,7 +36,17 @@ public class GameManager : MonoBehaviour
     {
         if(gameState == GameState.PLAY)
         {
-            ui.UpdateSlider(_counter());
+
+            if(startTime > 0)
+            {
+                ui.UpdateTimer(_updateTimer());
+            }
+            else
+            {
+                gameState = GameState.GAMEOVER;
+            }
+            
+           
         }
         if(gameState == GameState.GAMEOVER && !isGameOver)
         {
@@ -45,24 +57,40 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+    /*服増やす処理*/
     public void GetCloth()
     {
         clothCount++;
+        ui.UpdateText(clothCount);
     }
+    /*服減らす処理*/
     public void DelCloth()
     {
         clothCount--;
+        ui.UpdateText(clothCount);
+    }
+    /*HPカウンター*/
+    public void HpCounter()
+    {
+        hp += Time.deltaTime;
+        ui.UpdateHPSlider((int)hp);
     }
 
+    /*ゲームのステート変更*/
     public void ChangeState(GameState state)
     {
         gameState = state;
     }
 
-    private int _counter()
+
+    /*タイマー処理*/
+    private float _updateTimer()
     {
-        time += Time.deltaTime;
-        return (int)time;
+        seconds += Time.deltaTime;
+        float timerfloat = seconds / playTime;
+        startTime = 1f - timerfloat;
+        return startTime;
     }
 
 }

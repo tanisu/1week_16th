@@ -30,6 +30,13 @@ public class PlayerController_2nd : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+
+        //タニス追記：太陽フェーズの当たり判定
+        if (other.CompareTag("PhaseBlock"))
+        {
+            return;
+        }
+
         //服をゲットするとスコアプラス
         if (other.gameObject.tag == "Clothes")
         {
@@ -41,7 +48,6 @@ public class PlayerController_2nd : MonoBehaviour
         {
             GameManager.I.DelCloth();
         }
-
         //触れたオブジェクトの破壊
         Destroy(other.gameObject);
     }

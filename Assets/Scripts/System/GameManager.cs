@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] UIController ui;
     [SerializeField] float playTime;
     [SerializeField] PhaseController phase;
+    [SerializeField] PhaseBlockController sunPhase;
     public static GameManager I;
     private int clothCount = 0;
     private float hp;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
                 {
                     isPhaseMove[0] = true;
                     phase.SunPhase();
+                    
                 }
                 else if(startTime > 0.4 && startTime < 0.7 && !isPhaseMove[1])//北風フェーズ
                 {
@@ -92,7 +94,7 @@ public class GameManager : MonoBehaviour
     public void HpCounter()
     {
         hp += Time.deltaTime;
-        ui.UpdateHPSlider((int)hp);
+       // ui.UpdateHPSlider((int)hp);
     }
 
     /*ゲームのステート変更*/
@@ -101,6 +103,10 @@ public class GameManager : MonoBehaviour
         gameState = state;
     }
 
+    public void UpdateOndo()
+    {
+        ui.UpdateOndo();
+    }
 
     /*タイマー処理*/
     private float _updateTimer()

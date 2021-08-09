@@ -6,11 +6,13 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] UIController ui;
     [SerializeField] float playTime;
+    [SerializeField] PhaseController phase;
     public static GameManager I;
     private int clothCount = 0;
     private float hp;
     private GameState gameState;
     private bool isGameOver = false;
+    private bool[] isPhaseMove = { false, false, false };
     private float seconds = 0f;
     private float startTime = 1.0f;
 
@@ -41,6 +43,21 @@ public class GameManager : MonoBehaviour
             if(startTime > 0)
             {
                 ui.UpdateTimer(_updateTimer());
+                if(startTime > 0.7 && !isPhaseMove[0])//太陽フェーズ
+                {
+                    isPhaseMove[0] = true;
+                    phase.SunPhase();
+                }
+                else if(startTime > 0.4 && startTime < 0.7 && !isPhaseMove[1])//北風フェーズ
+                {
+                    isPhaseMove[1] = true;
+                    phase.CloudPhase();
+                }
+                else if(startTime < 0.4 && !isPhaseMove[2])//両方フェーズ
+                {
+                    isPhaseMove[2] = true;
+                    phase.BothPhase();
+                }
             }
             else
             {

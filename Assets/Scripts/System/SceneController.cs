@@ -7,7 +7,7 @@ public class SceneController : MonoBehaviour
     public static SceneController I { get; private set; }
 
     string currentSceneName;
-    int score = 0;
+    public int score { get; private set; }
 
     private void Awake()
     {
@@ -50,6 +50,7 @@ public class SceneController : MonoBehaviour
     {
         score = clothCount;
     }
+
 
     private void _sceneTo(string sceneName)
     {

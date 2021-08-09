@@ -8,13 +8,11 @@ public class PlayerController_2nd : MonoBehaviour
     public float limitSpeed = 10f;
     public int direction = 1;
     Rigidbody2D rigid2D;
-    GameObject gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         rigid2D = GetComponent<Rigidbody2D>();
-        gameManager = GameObject.Find("GameManager");
 
     }
 
@@ -35,12 +33,14 @@ public class PlayerController_2nd : MonoBehaviour
         //服をゲットするとスコアプラス
         if (other.gameObject.tag == "Clothes")
         {
-            Debug.Log("ゲット");
-            gameManager.GetComponent<GameManager>().GetCloth();
+            GameManager.I.GetCloth();
         }
 
         //TODO:↓風弾に触れるとスコアマイナス
-
+        if (other.gameObject.tag == "Wind")
+        {
+            GameManager.I.DelCloth();
+        }
 
         //触れたオブジェクトの破壊
         Destroy(other.gameObject);

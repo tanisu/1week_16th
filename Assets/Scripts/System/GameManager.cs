@@ -15,6 +15,13 @@ public class GameManager : MonoBehaviour
     private bool isGameOver = false;
     private bool[] isPhaseMove = { false, false, false };
     private float seconds = 0f;
+    //WindGenerator????????????????????????????????
+    public float Seconds
+    {
+        get { return this.seconds; }
+        private set { this.seconds = value; }
+    }
+
     private float startTime = 1.0f;
 
     private GameState gameState;
@@ -43,26 +50,23 @@ public class GameManager : MonoBehaviour
     {
         if(gameState == GameState.PLAY)
         {
-
-
-
             if(startTime > 0)
             {
                 ui.UpdateTimer(_updateTimer());
-                if(startTime > 0.7 && !isPhaseMove[0])//太陽フェーズ
+                if(startTime > 0.7 && !isPhaseMove[0])//???z?t?F?[?Y
                 {
                     
                     isPhaseMove[0] = true;
                     phase.SunPhase();
                     
                 }
-                else if(startTime > 0.4 && startTime < 0.7 && !isPhaseMove[1])//北風フェーズ
+                else if(startTime > 0.4 && startTime < 0.7 && !isPhaseMove[1])//?k???t?F?[?Y
                 {
                     phaseState = PhaseState.KITAKAZE;
                     isPhaseMove[1] = true;
                     phase.CloudPhase();
                 }
-                else if(startTime < 0.4 && !isPhaseMove[2])//両方フェーズ
+                else if(startTime < 0.4 && !isPhaseMove[2])//?????t?F?[?Y
                 {
                     phaseState = PhaseState.BOTH;
                     isPhaseMove[2] = true;
@@ -86,13 +90,13 @@ public class GameManager : MonoBehaviour
     }
 
 
-    /*服増やす処理*/
+    /*????????????*/
     public void GetCloth()
     {
         clothCount++;
         ui.UpdateText(clothCount);
     }
-    /*服減らす処理*/
+    /*????????????*/
     public void DelCloth()
     {
         clothCount--;
@@ -100,18 +104,18 @@ public class GameManager : MonoBehaviour
     }
 
 
-    /*ゲームのステート変更*/
+    /*?Q?[?????X?e?[?g???X*/
     public void ChangeState(GameState state)
     {
         gameState = state;
     }
-    /*温度計の処理*/
+    /*???x?v??????*/
     public void UpdateOndo(bool isUp)
     {
         ui.UpdateOndo(isUp);
     }
 
-    /*タイマー処理*/
+    /*?^?C?}?[????*/
     private float _updateTimer()
     {
         seconds += Time.deltaTime;

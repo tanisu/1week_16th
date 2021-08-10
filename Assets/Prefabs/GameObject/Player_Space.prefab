@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 5914279594614954752}
   m_Layer: 3
   m_Name: Player_Space
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,7 +232,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.035926282, y: 0.063789845}
+  m_Offset: {x: 0.04093522, y: -0.10836756}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -243,7 +243,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0820023, y: 1.4444661}
+  m_Size: {x: 0.33065856, y: 1.1877058}
   m_EdgeRadius: 0
 --- !u!114 &5914279594614954752
 MonoBehaviour:
@@ -257,8 +257,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e080af58359c4f829465b1401c55995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aceleration: 20
-  limitSpeed: 5
+  aceleration: 15
+  limitSpeed: 2
   direction: 1
 --- !u!1 &6596678487756282961
 GameObject:
@@ -286,7 +286,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6596678487756282961}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1917641612868569799}

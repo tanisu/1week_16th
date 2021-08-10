@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3133517604947942831}
   - component: {fileID: 8924900945042380643}
   - component: {fileID: 5093456846689723417}
+  - component: {fileID: 3529579450529016729}
   m_Layer: 0
   m_Name: Wind
   m_TagString: Wind
@@ -99,3 +100,19 @@ CircleCollider2D:
   m_Offset: {x: 0.1, y: 0}
   serializedVersion: 2
   m_Radius: 0.26
+--- !u!114 &3529579450529016729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2382640345386788457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27230ca0fe1034ed5a87599bcc00f838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementTime: 6
+  vanishTime: 3
+  scaleValue: 2
+  scaleChangeTime: 3

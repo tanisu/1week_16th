@@ -6,9 +6,8 @@ public class ClothesGenerator : MonoBehaviour
 {
     public GameObject fallClothesPrefab;
     public GameObject boundeClothesPrefab;
-    float span = 1.0f;
+    public float span = 1.0f;
     float delta = 0;
-
 
     void Update()
     {
@@ -22,7 +21,7 @@ public class ClothesGenerator : MonoBehaviour
             generateDice = Random.Range(0, 11);
 
             //generateDiceが1 ~ 5の時に落ちる服を生成
-            if (generateDice < 6)
+            if (generateDice < 7)
             {
                 clothes = Instantiate(fallClothesPrefab) as GameObject;
 
@@ -30,7 +29,7 @@ public class ClothesGenerator : MonoBehaviour
                 float x = Random.Range(-7.7f, 7.7f);
                 clothes.transform.position = new Vector2(x, 6f);
             }
-            else if(generateDice >= 6 && generateDice < 11)　//generateDiceが6 ~ 10の時に跳ねる服を生成
+            else if(generateDice >= 8 && generateDice < 11)　//generateDiceが6 ~ 10の時に跳ねる服を生成
             {
                 //跳ねる服を生成
                 clothes = Instantiate(boundeClothesPrefab) as GameObject;

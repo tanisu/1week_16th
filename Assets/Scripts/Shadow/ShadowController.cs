@@ -11,6 +11,10 @@ public class ShadowController : MonoBehaviour
 
     private void Update()
     {
+        if(GameManager.I.phaseState != PhaseState.SUN)
+        {
+            gameObject.SetActive(false);
+        }
         float x = tfs[0].position.x - tfs[1].position.x;
         
         if(x < 0)
@@ -24,6 +28,8 @@ public class ShadowController : MonoBehaviour
         
     }
 
+
+    /*Player‚ÌˆÀ‘Sƒtƒ‰ƒO*/
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

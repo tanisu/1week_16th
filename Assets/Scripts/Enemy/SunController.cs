@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class SunController : MonoBehaviour
 {
-    public static bool isPlayerIn = false;
+    public static bool isPlayerInTheSun = false;
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (ShadowController.isPlayerSafe)
+        /*PlayerÇ™âeÇÃíÜÇ»ÇÁreturn*/
+        if (ShadowController.isPlayerSafe || GameManager.I.phaseState == PhaseState.KITAKAZE)
         {
             GameManager.I.UpdateOndo(false);
             return;
         }
-
-        if (collision.CompareTag("Player") && !isPlayerIn)
+        /*ÇªÇ§Ç≈Ç»ÇØÇÍÇŒâ∑ìxè„Ç∞ÇÈ*/
+        if (collision.CompareTag("Player") && !isPlayerInTheSun)
         {
-            isPlayerIn = true;
+            isPlayerInTheSun = true;
             GameManager.I.UpdateOndo(true);
         }
     }

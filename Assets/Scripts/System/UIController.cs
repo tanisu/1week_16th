@@ -12,7 +12,10 @@ public class UIController : MonoBehaviour
     [SerializeField] Slider hpSlider;
     [SerializeField] Image timerImage;
     [SerializeField] Image ondoImage;
-    Tweener tweener;
+    [SerializeField] float upSpeed;
+    [SerializeField] float downSpeed;
+    Tween tw;
+    bool isRestart = false;
 
 
     public void UpdateText(int clothCount)
@@ -25,21 +28,55 @@ public class UIController : MonoBehaviour
         timerImage.DOFillAmount(timer, 0.1f).SetEase(Ease.Linear).SetLink(timerImage.gameObject);
     }
 
+    /*温度の上げ下げ処理*/
     public void UpdateOndo(bool isUp)
     {
+        /*上がっていく処理（太陽に当たってる）*/
         if (isUp)
         {
-            
-            tweener = ondoImage.DOFillAmount(1f, 1.57f).SetEase(Ease.InCubic).SetLink(ondoImage.gameObject).OnComplete(() =>
+            //ゲージを上げる
+            tw = ondoImage.DOFillAmount(1f, upSpeed)
+                .SetEase(Ease.OutSine)
+                .SetLink(ondoImage.gameObject)
+                //コールバック処理
+                .OnComplete(() =>
+                {
+                    //服減らす
+                    GameManager.I.DelCloth();
+                    //ゲージを下げる
+                    ondoImage.DOFillAmount(0f, downSpeed)
+                    .SetEase(Ease.OutSine)
+                    //下がり切ったら
+                    .OnComplete(() => 
+                        { 
+                            //太陽当たってるフラグ反転
+                            SunController.isPlayerInTheSun = false; 
+                        }
+                    );
+                }
+            );
+            //もし初回太陽に当たってるならDotweenをPlay
+            if (!isRestart)
             {
-                GameManager.I.DelCloth();
-                ondoImage.DOFillAmount(0f, 0.13f).SetEase(Ease.InCubic).OnComplete(() => { SunController.isPlayerIn = false; });
-            });
-            tweener.Play();
+                isRestart = true;
+                tw.Play();
+            }
+            //二回目以降ならRestart
+            else
+            {
+                tw.Restart();
+            }
+            
         }
+        /*日陰に居る処理*/
         else
         {
-            ondoImage.DOFillAmount(0f, 0.13f).SetEase(Ease.InCubic).SetLink(ondoImage.gameObject);
+            //ゲージが上がるのを止める
+            tw.Pause();
+            //ゲージを下げる
+            ondoImage.DOFillAmount(0f, downSpeed).SetEase(Ease.OutSine).SetLink(ondoImage.gameObject);
+            //太陽に当たってるフラグ反転
+            SunController.isPlayerInTheSun = false;
         }
         
     }

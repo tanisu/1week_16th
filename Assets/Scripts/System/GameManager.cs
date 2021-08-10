@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private float startTime = 1.0f;
 
     private GameState gameState;
-    private PhaseState phaseState;
+    public PhaseState phaseState { get; private set; }
 
     private void Awake()
     {

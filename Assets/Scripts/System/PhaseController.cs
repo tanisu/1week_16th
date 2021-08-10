@@ -26,9 +26,13 @@ public class PhaseController : MonoBehaviour
     public void SunPhase()
     {
         sp[0].DOFade(0.3f,1f);
-        phaseCharacters[0].transform.DOMoveX(sun.endX,20f).OnComplete(()=> {
-            phaseCharacters[0].transform.position = sun.startPos;
-        });
+        /*‘¾—z‚Ís‚Á‚½‚Á‚«‚è*/
+        //phaseCharacters[0].transform.DOMoveX(sun.endX, 20f).OnComplete(() => {
+        //    phaseCharacters[0].transform.position = sun.startPos;
+        //});
+
+        /*‘¾—z‚Í–ß‚Á‚Ä‚­‚é*/
+        phaseCharacters[0].transform.DOMoveX(sun.endX, 8.5f).SetLoops(2, LoopType.Yoyo).SetLink(phaseCharacters[0].gameObject);           
     }
 
     public void CloudPhase()
@@ -47,7 +51,7 @@ public class PhaseController : MonoBehaviour
         phaseBG[0].SetActive(true);
         sp[0].DOFade(phaseBGAlpha[0],0.2f);
         phaseBG[0].transform.DOMoveX(-9, 0.5f);
-        phaseBG[1].transform.DOMoveX(8, 0.5f);
+        phaseBG[1].transform.DOMoveX(9, 0.5f);
 
         phaseCharacters[0].transform.DOMoveX(-5f, 0.5f);
         

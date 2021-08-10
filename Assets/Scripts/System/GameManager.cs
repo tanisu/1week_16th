@@ -7,17 +7,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] UIController ui;
     [SerializeField] float playTime;
     [SerializeField] PhaseController phase;
-    [SerializeField] PhaseBlockController sunPhase;
+    [SerializeField] SunController sun;
     public static GameManager I;
     private int clothCount = 0;
-    private float hp;
-    private GameState gameState;
+    
+    
     private bool isGameOver = false;
     private bool[] isPhaseMove = { false, false, false };
     private float seconds = 0f;
     private float startTime = 1.0f;
 
-    
+    private GameState gameState;
+    private PhaseState phaseState;
+
     private void Awake()
     {
         if (I == null)
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
     {
         SceneController.I.SetScore(clothCount);
         gameState = GameState.PLAY;
+        phaseState = PhaseState.SUN;
     }
 
     private void Update()
@@ -41,22 +44,27 @@ public class GameManager : MonoBehaviour
         if(gameState == GameState.PLAY)
         {
 
+
+
             if(startTime > 0)
             {
                 ui.UpdateTimer(_updateTimer());
                 if(startTime > 0.7 && !isPhaseMove[0])//太陽フェーズ
                 {
+                    
                     isPhaseMove[0] = true;
                     phase.SunPhase();
                     
                 }
                 else if(startTime > 0.4 && startTime < 0.7 && !isPhaseMove[1])//北風フェーズ
                 {
+                    phaseState = PhaseState.KITAKAZE;
                     isPhaseMove[1] = true;
                     phase.CloudPhase();
                 }
                 else if(startTime < 0.4 && !isPhaseMove[2])//両方フェーズ
                 {
+                    phaseState = PhaseState.BOTH;
                     isPhaseMove[2] = true;
                     phase.BothPhase();
                 }
@@ -90,22 +98,17 @@ public class GameManager : MonoBehaviour
         clothCount--;
         ui.UpdateText(clothCount);
     }
-    /*HPカウンター*/
-    public void HpCounter()
-    {
-        hp += Time.deltaTime;
-       // ui.UpdateHPSlider((int)hp);
-    }
+
 
     /*ゲームのステート変更*/
     public void ChangeState(GameState state)
     {
         gameState = state;
     }
-
-    public void UpdateOndo()
+    /*温度計の処理*/
+    public void UpdateOndo(bool isUp)
     {
-        ui.UpdateOndo();
+        ui.UpdateOndo(isUp);
     }
 
     /*タイマー処理*/

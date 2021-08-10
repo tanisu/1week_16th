@@ -32,7 +32,7 @@ public class PlayerController_2nd : MonoBehaviour
     {
 
         //タニス追記：太陽フェーズの当たり判定
-        if (other.CompareTag("PhaseBlock"))
+        if (other.CompareTag("PhaseBlock") || other.CompareTag("Shadow"))
         {
             return;
         }

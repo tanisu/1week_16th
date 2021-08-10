@@ -12,17 +12,8 @@ public class UIController : MonoBehaviour
     [SerializeField] Slider hpSlider;
     [SerializeField] Image timerImage;
     [SerializeField] Image ondoImage;
+    Tweener tweener;
 
-
-    //public void UpdateHPSlider(int time)
-    //{
-    //    if((hpSlider.maxValue - time) < 0)
-    //    {
-    //        return;
-    //    }
-    //    hpSlider.value = hpSlider.maxValue - time;
-
-    //}
 
     public void UpdateText(int clothCount)
     {
@@ -34,12 +25,22 @@ public class UIController : MonoBehaviour
         timerImage.DOFillAmount(timer, 0.1f).SetEase(Ease.Linear).SetLink(timerImage.gameObject);
     }
 
-    public void UpdateOndo()
+    public void UpdateOndo(bool isUp)
     {
-        ondoImage.DOFillAmount(1f, 3f).SetEase(Ease.InCubic).SetLink(ondoImage.gameObject).OnComplete(() =>
+        if (isUp)
         {
-            GameManager.I.DelCloth();
-            ondoImage.DOFillAmount(0f, 0.5f).SetEase(Ease.InCubic).OnComplete(()=> { PhaseBlockController.isPlayerIn = false; });
-        });
+            
+            tweener = ondoImage.DOFillAmount(1f, 1.57f).SetEase(Ease.InCubic).SetLink(ondoImage.gameObject).OnComplete(() =>
+            {
+                GameManager.I.DelCloth();
+                ondoImage.DOFillAmount(0f, 0.13f).SetEase(Ease.InCubic).OnComplete(() => { SunController.isPlayerIn = false; });
+            });
+            tweener.Play();
+        }
+        else
+        {
+            ondoImage.DOFillAmount(0f, 0.13f).SetEase(Ease.InCubic).SetLink(ondoImage.gameObject);
+        }
+        
     }
 }

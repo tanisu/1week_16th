@@ -20,7 +20,7 @@ public class UIController : MonoBehaviour
 
     public void UpdateText(int clothCount)
     {
-        clothesText.text = $"•F{clothCount}–‡";
+        clothesText.text = $"æœï¼š{clothCount}æš";
     }
 
     public void UpdateTimer(float timer)
@@ -28,54 +28,54 @@ public class UIController : MonoBehaviour
         timerImage.DOFillAmount(timer, 0.1f).SetEase(Ease.Linear).SetLink(timerImage.gameObject);
     }
 
-    /*‰·“x‚Ìã‚°‰º‚°ˆ—*/
+    /*???x??????????????*/
     public void UpdateOndo(bool isUp)
     {
-        /*ã‚ª‚Á‚Ä‚¢‚­ˆ—i‘¾—z‚É“–‚½‚Á‚Ä‚éj*/
+        /*?????????????????i???z?????????????j*/
         if (isUp)
         {
-            //ƒQ[ƒW‚ğã‚°‚é
+            //?Q?[?W????????
             tw = ondoImage.DOFillAmount(1f, upSpeed)
                 .SetEase(Ease.OutSine)
                 .SetLink(ondoImage.gameObject)
-                //ƒR[ƒ‹ƒoƒbƒNˆ—
+                //?R?[???o?b?N????
                 .OnComplete(() =>
                 {
-                    //•Œ¸‚ç‚·
+                    //????????
                     GameManager.I.DelCloth();
-                    //ƒQ[ƒW‚ğ‰º‚°‚é
+                    //?Q?[?W????????
                     ondoImage.DOFillAmount(0f, downSpeed)
                     .SetEase(Ease.OutSine)
-                    //‰º‚ª‚èØ‚Á‚½‚ç
+                    //??????????????
                     .OnComplete(() => 
                         { 
-                            //‘¾—z“–‚½‚Á‚Ä‚éƒtƒ‰ƒO”½“]
+                            //???z???????????t???O???]
                             SunController.isPlayerInTheSun = false; 
                         }
                     );
                 }
             );
-            //‚à‚µ‰‰ñ‘¾—z‚É“–‚½‚Á‚Ä‚é‚È‚çDotween‚ğPlay
+            //???????????z????????????????Dotween??Play
             if (!isRestart)
             {
                 isRestart = true;
                 tw.Play();
             }
-            //“ñ‰ñ–ÚˆÈ~‚È‚çRestart
+            //?????????~????Restart
             else
             {
                 tw.Restart();
             }
             
         }
-        /*“ú‰A‚É‹‚éˆ—*/
+        /*???A??????????*/
         else
         {
-            //ƒQ[ƒW‚ªã‚ª‚é‚Ì‚ğ~‚ß‚é
+            //?Q?[?W?????????????~????
             tw.Pause();
-            //ƒQ[ƒW‚ğ‰º‚°‚é
+            //?Q?[?W????????
             ondoImage.DOFillAmount(0f, downSpeed).SetEase(Ease.OutSine).SetLink(ondoImage.gameObject);
-            //‘¾—z‚É“–‚½‚Á‚Ä‚éƒtƒ‰ƒO”½“]
+            //???z?????????????t???O???]
             SunController.isPlayerInTheSun = false;
         }
         

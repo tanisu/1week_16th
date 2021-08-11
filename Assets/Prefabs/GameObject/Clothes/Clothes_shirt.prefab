@@ -112,5 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bf8a9381352e4a8d9512e8073e2d1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 4
+  duration: 3
+  fallDistance: 0.25
+  sideDistance: 2
   endPoint: -3.3
+  waitTime: 3
+  flickTime: 4

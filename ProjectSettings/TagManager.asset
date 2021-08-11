@@ -8,6 +8,11 @@ TagManager:
   - Wind
   - PhaseBlock
   - Shadow
+  - Spacesuit
+  - Coat
+  - Suit
+  - Parker
+  - Scarf
   layers:
   - Default
   - TransparentFX

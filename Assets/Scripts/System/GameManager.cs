@@ -93,10 +93,11 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         SceneController.I.ChangeScene("Result");
     }
-    
-    public void GetCloth()
+
+    //↓服の種類によって点数を変えられるようにしました。
+    public void GetCloth(int i)
     {
-        clothCount++;
+        clothCount = clothCount + i;
         ui.UpdateText(clothCount);
     }
     

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class BoundClothesController : MonoBehaviour
+public class SideClothesController : MonoBehaviour
 {
     // ↓跳ねる動きのときに使用（最終的に消す）
     /*

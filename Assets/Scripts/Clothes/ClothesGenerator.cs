@@ -4,50 +4,108 @@ using UnityEngine;
 
 public class ClothesGenerator : MonoBehaviour
 {
-    public GameObject fallClothesPrefab;
-    public GameObject boundeClothesPrefab;
+    public GameObject coatPrefab;
+    public GameObject skarfPrefab;
+    public GameObject parkerPrefab;
+    public GameObject suitPrefab;
+    public GameObject spaceSuitPrefab;
     public float span = 1.0f;
-    float delta = 0;
+
+    private float delta = 0;
+    private GameObject clothes;
+    private float second;
 
     void Update()
     {
-        GameObject clothes;
+        second = GameManager.I.Seconds;
 
         this.delta += Time.deltaTime;
         if(this.delta > this.span)
         {
-
             int generateDice;
             generateDice = Random.Range(0, 11);
 
-            //generateDiceが1 ~ 5の時に落ちる服を生成
-            if (generateDice < 7)
+            if(second < 40) // ゲーム開始40秒までは、80%：落ちてくる服、20％：横からの服
             {
-                clothes = Instantiate(fallClothesPrefab) as GameObject;
-
-                //ランダムな場所に生成
-                float x = Random.Range(-7.7f, 7.7f);
-                clothes.transform.position = new Vector2(x, 6f);
-            }
-            else if(generateDice >= 8 && generateDice < 11)　//generateDiceが6 ~ 10の時に跳ねる服を生成
-            {
-                //跳ねる服を生成
-                clothes = Instantiate(boundeClothesPrefab) as GameObject;
-
-                //左右ランダムな場所に生成
-                int i = Random.Range(0, 2);
-                float x = Random.Range(10f, 16f);
-                if(i == 0)
+                if (generateDice < 9)
                 {
-                    clothes.transform.position = new Vector2(x, -3.5f);
+                    GenerateFallCloth();
                 }
-                else if(i == 1)
+                else if (9 <= generateDice && generateDice < 11)
                 {
-                    clothes.transform.position = new Vector2(-x, -3.5f);
+                    GenerateSideCloth();
+                }
+            }
+            else if(40 <= second)// ゲーム開始後40秒をすぎれば、60%：落ちてくる服、40%：横からの服
+            {
+                if (generateDice < 7)
+                {
+                    GenerateFallCloth();
+                }
+                else if (7 <= generateDice && generateDice < 11)
+                {
+                    GenerateSideCloth();
                 }
             }
             delta = 0;
         }
 
     }
+
+    //上部に生成
+    public void GenerateFallCloth()
+    {
+        int fallDice;
+        fallDice = Random.Range(0, 11);
+
+        // 50% コート, 30% スカーフ, 20%　パーカー
+        if(fallDice < 6)
+        {
+            clothes = Instantiate(coatPrefab) as GameObject;
+        }
+        else if(6 <= fallDice && fallDice < 9)
+        {
+            clothes = Instantiate(skarfPrefab) as GameObject;
+        }
+        else if(9 <= fallDice)
+        {
+            clothes = Instantiate(parkerPrefab) as GameObject;
+        }
+
+        float x = Random.Range(-7.7f, 7.7f);
+        clothes.transform.position = new Vector2(x, 6f);
+    }
+
+    //左右に生成
+    public void GenerateSideCloth()
+    {
+        int sideDice;
+        sideDice = Random.Range(0, 11);
+
+        //70% スーツ, 30% 宇宙服
+        if (sideDice < 8)
+        {
+            clothes = Instantiate(suitPrefab) as GameObject;
+        }
+        else if (8 <= sideDice)
+        {
+            clothes = Instantiate(spaceSuitPrefab) as GameObject;
+        }
+
+        int i = Random.Range(0, 2);
+        float x = Random.Range(10f, 16f);
+
+        if (i == 0)
+        {
+            clothes.transform.position = new Vector2(x, -3.5f);
+        }
+        else if (i == 1)
+        {
+            clothes.transform.position = new Vector2(-x, -3.5f);
+        }
+    }
+
+
+
+
 }

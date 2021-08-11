@@ -11,7 +11,7 @@ public class ClothesGenerator : MonoBehaviour
     public GameObject spaceSuitPrefab;
     public float span = 1.0f;
 
-    private float delta = 0;
+    private float delta = 0.8f;
     private GameObject clothes;
     private float second;
 
@@ -104,8 +104,4 @@ public class ClothesGenerator : MonoBehaviour
             clothes.transform.position = new Vector2(-x, -3.5f);
         }
     }
-
-
-
-
 }

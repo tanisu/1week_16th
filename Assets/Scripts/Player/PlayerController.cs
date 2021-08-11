@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
             {"Suit",4 },
             {"Spacesuit",5 }
         };
-
     }
 
     void Update()
@@ -66,7 +65,6 @@ public class PlayerController : MonoBehaviour
         {
             TouchedClothes(other);
         }
-        
 
         //風弾に触れるとスコアマイナス
         if (other.gameObject.tag == "Wind")
@@ -79,7 +77,6 @@ public class PlayerController : MonoBehaviour
                 DropCloth(touchedCloth);
             }
         }
-
 
         //触れたオブジェクトの破壊
         Destroy(other.gameObject);
@@ -128,7 +125,6 @@ public class PlayerController : MonoBehaviour
         //タニス追記：服による減点処理
         GameManager.I.DelCloth(clothPoint[other.gameObject.tag]);
         sp.transform.position = gameObject.transform.position;
-
     }
 
     //左右反転
@@ -143,32 +139,28 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Coat")
         {
             touchedCloth = coat;
-            
         }
 
         if (other.gameObject.tag == "Scarf")
         {
             touchedCloth = scarf;
-            
         }
 
         if (other.gameObject.tag == "Parker")
         {
             touchedCloth = parker;
-            
         }
 
         if (other.gameObject.tag == "Suit")
         {
             touchedCloth = suit;
-            
         }
 
         if (other.gameObject.tag == "Spacesuit")
         {
             touchedCloth = spacesuit;
-            
         }
+
         //タニス追記：服による加点処理
         GameManager.I.GetCloth(clothPoint[other.gameObject.tag]);
         if (touchedCloth != null && touchedCloth.activeSelf == false)

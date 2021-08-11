@@ -41,6 +41,9 @@ public class PhaseController : MonoBehaviour
     {
         sp[1].DOFade(phaseBGAlpha[1], VIEW_BG_TIME);
         phaseCharacters[1].transform.DOMoveX(cloud.endX, 5f);
+
+        //↓往復用
+        //phaseCharacters[1].transform.DOMoveX(cloud.endX, 10f).SetLoops(-1, LoopType.Yoyo);
     }
 
     public void BothPhase()

@@ -13,7 +13,7 @@ public class SideClothesController : MonoBehaviour
     public float verticalEndPoint;
     */
     
-    public float movementSpeed = 40f;
+    public float movementTime = 40f;
 
     void Start()
     {
@@ -39,7 +39,7 @@ public class SideClothesController : MonoBehaviour
                 new Vector3(-1.59f + i, -3.14f, 0),
                 new Vector3(-4.76f + i, -1.26f, 0),
                 new Vector3(-22.0f, 0, 0),
-            }, movementSpeed,
+            }, movementTime,
             PathType.CatmullRom).SetLink(gameObject);
 
         }
@@ -64,7 +64,7 @@ public class SideClothesController : MonoBehaviour
                 new Vector3(1.59f + i, -3.14f, 0),
                 new Vector3(4.76f + i, -1.26f, 0),
                 new Vector3(22.0f, 0, 0),
-            }, movementSpeed,
+            }, movementTime,
             PathType.CatmullRom).SetLink(gameObject);
 
         }

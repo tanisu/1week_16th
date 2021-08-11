@@ -50,9 +50,6 @@ public class WindController : MonoBehaviour
             transform.DOScale(new Vector3(-scaleValue, scaleValue, scaleValue), scaleChangeTime).SetLink(gameObject);
         }
 
-        transform.DOLocalMove(new Vector3(x, -4.2f, 0), 5f).SetLink(gameObject);
+        transform.DOLocalMove(new Vector3(x, -4.2f, 0), movementTime).SetLink(gameObject);
     }
-
-
-
 }

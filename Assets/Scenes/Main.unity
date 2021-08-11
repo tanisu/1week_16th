@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windPrefab: {fileID: 2382640345386788457, guid: e409807429d0241bbb55629a39239f41, type: 3}
-  span: 6
+  span: 5
 --- !u!1001 &61530233
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,7 +42,7 @@ public class UIController : MonoBehaviour
                 .OnComplete(() =>
                 {
                     //????????
-                    GameManager.I.DelCloth();
+                    GameManager.I.DelCloth(1);
                     //?Q?[?W????????
                     ondoImage.DOFillAmount(0f, downSpeed)
                     .SetEase(Ease.OutSine)

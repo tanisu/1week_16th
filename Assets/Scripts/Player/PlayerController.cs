@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -24,10 +24,20 @@ public class PlayerController : MonoBehaviour
     public GameObject scarfSprite;
 
     private GameObject touchedCloth;
-
+    //タニス追記：服とポイントの辞書型宣言
+    private Dictionary<string, int> clothPoint;
     void Start()
     {
         rigid2D = GetComponent<Rigidbody2D>();
+        //タニス追記：服とポイントの辞書型定義
+        clothPoint = new Dictionary<string, int>()
+        {
+            {"Coat",1 },
+            {"Scarf",2 },
+            {"Parker",3 },
+            {"Suit",4 },
+            {"Spacesuit",5 }
+        };
 
     }
 
@@ -51,12 +61,16 @@ public class PlayerController : MonoBehaviour
         }
 
         //触れた服を反映
-        TouchedClothes(other);
+        //タニス追記：風の当たり判定除外
+        if (!other.CompareTag("Wind"))
+        {
+            TouchedClothes(other);
+        }
+        
 
         //風弾に触れるとスコアマイナス
         if (other.gameObject.tag == "Wind")
         {
-            GameManager.I.DelCloth();
 
             //服が脱げる
             if (touchedCloth != null && touchedCloth.activeSelf == true)
@@ -111,7 +125,8 @@ public class PlayerController : MonoBehaviour
         {
             sp = Instantiate(spacesuitSprite) as GameObject;
         }
-
+        //タニス追記：服による減点処理
+        GameManager.I.DelCloth(clothPoint[other.gameObject.tag]);
         sp.transform.position = gameObject.transform.position;
 
     }
@@ -128,33 +143,34 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Coat")
         {
             touchedCloth = coat;
-            GameManager.I.GetCloth(1);
+            
         }
 
         if (other.gameObject.tag == "Scarf")
         {
             touchedCloth = scarf;
-            GameManager.I.GetCloth(2);
+            
         }
 
         if (other.gameObject.tag == "Parker")
         {
             touchedCloth = parker;
-            GameManager.I.GetCloth(3);
+            
         }
 
         if (other.gameObject.tag == "Suit")
         {
             touchedCloth = suit;
-            GameManager.I.GetCloth(4);
+            
         }
 
         if (other.gameObject.tag == "Spacesuit")
         {
             touchedCloth = spacesuit;
-            GameManager.I.GetCloth(5);
+            
         }
-
+        //タニス追記：服による加点処理
+        GameManager.I.GetCloth(clothPoint[other.gameObject.tag]);
         if (touchedCloth != null && touchedCloth.activeSelf == false)
         {
             touchedCloth.SetActive(true);

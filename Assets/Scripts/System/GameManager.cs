@@ -101,10 +101,14 @@ public class GameManager : MonoBehaviour
         ui.UpdateText(clothCount);
     }
     
-    public void DelCloth()
+    public void DelCloth(int i)
     {
-        clothCount--;
-        ui.UpdateText(clothCount);
+        if(clothCount > 0)
+        {
+            clothCount -= i;
+            ui.UpdateText(clothCount);
+        }
+        
     }
 
 

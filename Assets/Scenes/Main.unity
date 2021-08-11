@@ -1683,7 +1683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6280098670357237665, guid: 8881431010b78d04888c874b3dffc8a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.02
+      value: 3.43
       objectReference: {fileID: 0}
     - target: {fileID: 6280098670357237665, guid: 8881431010b78d04888c874b3dffc8a4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1725,10 +1725,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6280098670357237667, guid: 8881431010b78d04888c874b3dffc8a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6280098671445332384, guid: 8881431010b78d04888c874b3dffc8a4, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6280098671445332385, guid: 8881431010b78d04888c874b3dffc8a4, type: 3}
       propertyPath: tfs.Array.data[1]
       value: 
       objectReference: {fileID: 343688843}
+    - target: {fileID: 6280098671445332389, guid: 8881431010b78d04888c874b3dffc8a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8881431010b78d04888c874b3dffc8a4, type: 3}
 --- !u!4 &1252978450 stripped
@@ -3141,7 +3153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6280098670357237665, guid: 8881431010b78d04888c874b3dffc8a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.17
+      value: -3.49
       objectReference: {fileID: 0}
     - target: {fileID: 6280098670357237665, guid: 8881431010b78d04888c874b3dffc8a4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3183,9 +3195,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud
       objectReference: {fileID: 0}
+    - target: {fileID: 6280098671445332384, guid: 8881431010b78d04888c874b3dffc8a4, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6280098671445332385, guid: 8881431010b78d04888c874b3dffc8a4, type: 3}
       propertyPath: tfs.Array.data[1]
       value: 
       objectReference: {fileID: 343688843}
+    - target: {fileID: 6280098671445332389, guid: 8881431010b78d04888c874b3dffc8a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8881431010b78d04888c874b3dffc8a4, type: 3}

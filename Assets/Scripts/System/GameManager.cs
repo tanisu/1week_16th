@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     {
         SceneController.I.SetScore(clothCount);
         gameState = GameState.PLAY;
-        phaseState = PhaseState.SUN;
+        phaseState = PhaseState.KITAKAZE;
     }
 
     private void Update()
@@ -53,20 +53,20 @@ public class GameManager : MonoBehaviour
             if(startTime > 0)
             {
                 ui.UpdateTimer(_updateTimer());
-                if(startTime > 0.7 && !isPhaseMove[0])//???z?t?F?[?Y
+                if(startTime > 0.7 && !isPhaseMove[0])
                 {
                     
                     isPhaseMove[0] = true;
+                    phase.CloudPhase();
+                }
+                else if(startTime > 0.4 && startTime < 0.7 && !isPhaseMove[1])
+                {
+                    phaseState = PhaseState.SUN;
+                    isPhaseMove[1] = true;
                     phase.SunPhase();
                     
                 }
-                else if(startTime > 0.4 && startTime < 0.7 && !isPhaseMove[1])//?k???t?F?[?Y
-                {
-                    phaseState = PhaseState.KITAKAZE;
-                    isPhaseMove[1] = true;
-                    phase.CloudPhase();
-                }
-                else if(startTime < 0.4 && !isPhaseMove[2])//?????t?F?[?Y
+                else if(startTime < 0.4 && !isPhaseMove[2])
                 {
                     phaseState = PhaseState.BOTH;
                     isPhaseMove[2] = true;
@@ -82,21 +82,24 @@ public class GameManager : MonoBehaviour
         }
         if(gameState == GameState.GAMEOVER && !isGameOver)
         {
-            SceneController.I.SetScore(clothCount);
-            isGameOver = true;
-            SceneController.I.ChangeScene("Result");
+            _gameOver();
         }
 
     }
 
-
-    /*????????????*/
+    private void _gameOver()
+    {
+        SceneController.I.SetScore(clothCount);
+        isGameOver = true;
+        SceneController.I.ChangeScene("Result");
+    }
+    
     public void GetCloth()
     {
         clothCount++;
         ui.UpdateText(clothCount);
     }
-    /*????????????*/
+    
     public void DelCloth()
     {
         clothCount--;
@@ -104,18 +107,18 @@ public class GameManager : MonoBehaviour
     }
 
 
-    /*?Q?[?????X?e?[?g???X*/
+    
     public void ChangeState(GameState state)
     {
         gameState = state;
     }
-    /*???x?v??????*/
+    
     public void UpdateOndo(bool isUp)
     {
         ui.UpdateOndo(isUp);
     }
 
-    /*?^?C?}?[????*/
+    
     private float _updateTimer()
     {
         seconds += Time.deltaTime;

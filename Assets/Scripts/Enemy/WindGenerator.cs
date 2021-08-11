@@ -16,7 +16,7 @@ public class WindGenerator : MonoBehaviour
         second = GameManager.I.Seconds;
 
         //北風の口元が以下の範囲内であれば、風弾を放出
-        if (gameObject.transform.position.x > -6.5f && gameObject.transform.position.x < 6.5f)
+        if (-6.5f < gameObject.transform.position.x && gameObject.transform.position.x < 6.5f)
         {
             this.delta += Time.deltaTime;
             if (this.delta > this.span)
@@ -50,9 +50,9 @@ public class WindGenerator : MonoBehaviour
     private IEnumerator DelayBreath()
     {
         Breath();
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(1f);
         Breath();
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(1f);
         Breath();
         //3連ブレスの後は気持ち間隔を長めに。
         delta = 2f;

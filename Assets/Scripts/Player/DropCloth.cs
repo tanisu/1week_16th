@@ -22,5 +22,4 @@ public class DropCloth : MonoBehaviour
         Destroy(gameObject);
     }
 
-
 }

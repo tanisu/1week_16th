@@ -115,7 +115,14 @@ public class GameManager : MonoBehaviour
         
     }
 
-
+    public void GetClothObj(GameObject cloth)
+    {
+        Debug.Log(cloth);
+    }
+    public void DelClothObj()
+    {
+        Debug.Log("Del");
+    }
     
     public void ChangeState(GameState state)
     {

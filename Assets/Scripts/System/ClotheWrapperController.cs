@@ -8,6 +8,9 @@ public class ClotheWrapperController : MonoBehaviour
     [SerializeField] GameObject[] getClothes;
     float diff = 23.53f;
     int count = 0;
+    int rowCount = 0;
+    public int maxItem;
+    float rowPos = -20f;
     private List<GameObject> currentCloth;
 
     private void Start()
@@ -23,20 +26,25 @@ public class ClotheWrapperController : MonoBehaviour
             {
                 GameObject tmp = Instantiate(cloth);
                 tmp.transform.SetParent(transform,false);
-                float y = 1f;
-                if(clothTag == "Suit")
+                
+                if (count > 0 && count % maxItem == 0)
                 {
-                    y = 11f;
+                    rowCount++;
+                }
+                float y = 1f + (rowPos * rowCount);
+                if (clothTag == "Suit")
+                {
+                    y = 11f + (rowPos * rowCount); ;
                 } 
                 if(clothTag == "Spacesuit")
                 {
-                    y = 8f;
+                    y = 8f + (rowPos * rowCount); ;
                 }
-                tmp.transform.localPosition = new Vector3(count * diff, y, 1f);
+                tmp.transform.localPosition = new Vector3(count % maxItem * diff, y, 1f);
+                count++;
                 tmp.GetComponent<SpriteRenderer>().sortingOrder = count;
                 
                 currentCloth.Add(tmp);
-                count++;
             }
         }
     }
@@ -50,6 +58,11 @@ public class ClotheWrapperController : MonoBehaviour
             currentCloth.Remove(currentCloth.Last());
             Destroy(tmp);
             count--;
+            if(rowCount > 0 && count < maxItem)
+            {
+                rowCount--;
+            }
+            
         }
         
         

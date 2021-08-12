@@ -93,7 +93,6 @@ public class GameManager : MonoBehaviour
         SceneController.I.SetScore(clothCount);
         isGameOver = true;
         StartCoroutine("_changeResult");
-        //SceneController.I.ChangeScene("Result");
     }
 
     private IEnumerator _changeResult()

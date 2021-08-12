@@ -50,6 +50,10 @@ public class UIController : MonoBehaviour
 
     public void UpdateOndo(bool isUp)
     {
+        if(GameManager.I.gameState == GameState.GAMEOVER)
+        {
+            return;
+        }
         if (isUp)
         {
             tw = ondoImage.DOFillAmount(1f, upSpeed)

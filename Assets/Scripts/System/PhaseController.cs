@@ -34,7 +34,14 @@ public class PhaseController : MonoBehaviour
             phaseBG[0].SetActive(true);
             sp[0].DOFade(phaseBGAlpha[0], VIEW_BG_TIME);
         });
-        phaseCharacters[0].transform.DOMoveX(sun.endX, 13.5f).SetLoops(sun.loopTime, LoopType.Yoyo).SetLink(phaseCharacters[0].gameObject);
+        phaseCharacters[0].transform.DOMoveY(1.7f, 5f).OnComplete(() =>
+            {
+                phaseCharacters[0].transform.DOMoveX(sun.endX, 11.59f).OnComplete(()=> {
+                    phaseCharacters[0].transform.DOMoveX(-10f, 13.3f);
+                });
+            }
+        );
+        
         
     }
 

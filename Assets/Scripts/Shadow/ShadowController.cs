@@ -57,19 +57,21 @@ public class ShadowController : MonoBehaviour
             cloneTf.localPosition = new Vector3(cloneStartX + x, transform.localPosition.y, transform.localPosition.z);
 
         }
-        //if(tfs[1].position.x == -10f)
-        //{
-        //    transform.DOLocalMoveX(0, 0.1f).SetLink(gameObject);
-        //    cloneTf.DOLocalMoveX(cloneStartX,0.1f).SetLink(cloneShadow);
-        //}
 
-        //}
 
     }
 
 
     /*Playerの安全フラグ*/
     private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            isPlayerSafe = true;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {

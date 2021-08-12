@@ -241,17 +241,7 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log(getClothes.Count);
 
-
-
-
-
-
         this.aud.PlayOneShot(this.getSE);
-
-
-
-
-
 
         //タニス追記：服による加点処理
         GameManager.I.GetCloth(clothPoint[other.gameObject.tag]);

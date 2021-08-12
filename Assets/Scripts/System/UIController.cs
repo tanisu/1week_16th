@@ -43,7 +43,7 @@ public class UIController : MonoBehaviour
     }
     public void UpdateDelClothView()
     {
-
+        cwController.HideCloth();
     }
 
 

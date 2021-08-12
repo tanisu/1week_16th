@@ -12,11 +12,11 @@ public class PhaseController : MonoBehaviour
     const float IN_OUT_TIME = 0.5f;
     [SerializeField] GameObject[] phaseCharacters;
     PhaseObjController sun; 
-    PhaseObjController cloud;
+    PhaseObjController kitakaze;
     private void Start()
     {
         sun = phaseCharacters[0].GetComponent<PhaseObjController>();
-        cloud = phaseCharacters[1].GetComponent<PhaseObjController>();
+        kitakaze = phaseCharacters[1].GetComponent<PhaseObjController>();
         sp = new SpriteRenderer[2];
         for(int i = 0;i< sp.Length; i++)
         {
@@ -27,20 +27,23 @@ public class PhaseController : MonoBehaviour
 
     public void SunPhase()
     {
-        phaseCharacters[1].transform.DOMoveX(cloud.startPos.x, IN_OUT_TIME);
+        
         sp[1].DOFade(0, VIEW_BG_TIME).OnComplete(() =>
         {
             phaseBG[1].SetActive(false);
             phaseBG[0].SetActive(true);
             sp[0].DOFade(phaseBGAlpha[0], VIEW_BG_TIME);
         });
-        phaseCharacters[0].transform.DOMoveX(sun.endX, 8.5f).SetLoops(2, LoopType.Yoyo).SetLink(phaseCharacters[0].gameObject);           
+        phaseCharacters[0].transform.DOMoveX(sun.endX, 13.5f).SetLoops(sun.loopTime, LoopType.Yoyo).SetLink(phaseCharacters[0].gameObject);
+        
     }
 
     public void CloudPhase()
     {
         sp[1].DOFade(phaseBGAlpha[1], VIEW_BG_TIME);
-        phaseCharacters[1].transform.DOMoveX(cloud.endX, 5f);
+        phaseCharacters[1].transform.DOMoveX(kitakaze.endX, 7.1f).SetLoops(kitakaze.loopTime, LoopType.Yoyo);
+
+
 
         //↓往復用
         //phaseCharacters[1].transform.DOMoveX(cloud.endX, 10f).SetLoops(-1, LoopType.Yoyo);
@@ -48,14 +51,23 @@ public class PhaseController : MonoBehaviour
 
     public void BothPhase()
     {
-        phaseBG[1].SetActive(true);
-        sp[1].DOFade(phaseBGAlpha[1],0.2f);
-        phaseBG[0].transform.DOMoveX(-9, IN_OUT_TIME);
-        phaseBG[1].transform.DOMoveX(9, IN_OUT_TIME);
+        //phaseBG[1].SetActive(true);
+        //sp[1].DOFade(phaseBGAlpha[1],0.2f);
+        //phaseBG[0].transform.DOMoveX(0, IN_OUT_TIME);
+        //phaseBG[1].transform.DOMoveX(9, IN_OUT_TIME);
+        
 
-        phaseCharacters[1].transform.DOMoveX(5f, IN_OUT_TIME);
-        phaseCharacters[0].transform.DOMoveX(-5f, IN_OUT_TIME);
+        Tween tw =  phaseCharacters[1].transform.DOMoveX(5f, IN_OUT_TIME).OnComplete(()=> {
+            phaseCharacters[1].transform.DOMoveX(kitakaze.endX, 5f).SetLoops(-1, LoopType.Yoyo).SetLink(phaseCharacters[1].gameObject);
+        }
+        );
+        Tween tw_1 =  phaseCharacters[0].transform.DOMoveX(-5f, IN_OUT_TIME).OnComplete(()=> {
+            phaseCharacters[0].transform.DOMoveX(5, 5f).SetLoops(-1, LoopType.Yoyo).SetLink(phaseCharacters[0].gameObject);
+        });
+        if(GameManager.I.gameState == GameState.GAMEOVER)
+        {
 
+        }
 
 
     }

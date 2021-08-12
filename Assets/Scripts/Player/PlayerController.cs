@@ -175,6 +175,8 @@ public class PlayerController : MonoBehaviour
         }
         //タニス追記：服による減点処理
         GameManager.I.DelCloth(clothPoint[other.gameObject.tag]);
+        //タニス追記：UIの服削除
+        GameManager.I.DelClothObj();
         sp.transform.position = gameObject.transform.position;
 
         this.aud.PlayOneShot(this.dropSE);
@@ -218,6 +220,9 @@ public class PlayerController : MonoBehaviour
 
         //タニス追記：服による加点処理
         GameManager.I.GetCloth(clothPoint[other.gameObject.tag]);
+        //タニス追記：UIに服追加
+        GameManager.I.GetClothObj(other.gameObject);
+
         if (touchedCloth != null && touchedCloth.activeSelf == false)
         {
             touchedCloth.SetActive(true);

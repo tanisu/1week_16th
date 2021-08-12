@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/OldScene_DontUse/Result_old.unity
-    guid: 11384eb20ea788849a7c93a9e6f714f2
+    path: Assets/Scenes/Result.unity
+    guid: d7c6eae6b91d44d16859dc75d017284a
   - enabled: 1
     path: Assets/naichilab/unity-simple-ranking/Scenes/Ranking.unity
     guid: 152244f5855414ac4a3874f14efa583c

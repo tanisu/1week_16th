@@ -11,6 +11,9 @@ public class PlayerRestter : MonoBehaviour
         playerObject = GameObject.FindGameObjectWithTag("Player");
         playerObject.GetComponent<Rigidbody2D>().isKinematic = true;
         playerObject.transform.position = new Vector3(0, 0, 0);
+        /*
+        playerObject.transform.localRotation = new Vector3(0, 0, 0);
+        */
         playerObject.transform.localScale = new Vector3(3, 3, 3);
     }
 
@@ -18,6 +21,5 @@ public class PlayerRestter : MonoBehaviour
     {
         Destroy(playerObject);
     }
-
 
 }

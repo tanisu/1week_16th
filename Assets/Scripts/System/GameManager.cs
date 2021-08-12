@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                phase.BothEnd();
                 gameState = GameState.GAMEOVER;
             }
             
@@ -91,6 +92,13 @@ public class GameManager : MonoBehaviour
     {
         SceneController.I.SetScore(clothCount);
         isGameOver = true;
+        StartCoroutine("_changeResult");
+        //SceneController.I.ChangeScene("Result");
+    }
+
+    private IEnumerator _changeResult()
+    {
+        yield return new WaitForSeconds(2f);
         SceneController.I.ChangeScene("Result");
     }
 

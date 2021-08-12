@@ -1250,7 +1250,7 @@ MonoBehaviour:
   parkerPrefab: {fileID: 4516414165228726649, guid: 31445790c015d48d8bfbbab398bd0a8d, type: 3}
   suitPrefab: {fileID: 4972714885227376288, guid: 02f95949b27be454b98bdb8b6ca9bf19, type: 3}
   spaceSuitPrefab: {fileID: 5465389617360071332, guid: cf68686c2583e441fa2e447b3965e0b0, type: 3}
-  span: 3
+  span: 2.25
 --- !u!1 &714347103
 GameObject:
   m_ObjectHideFlags: 0

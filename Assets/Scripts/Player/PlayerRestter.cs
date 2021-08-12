@@ -10,8 +10,8 @@ public class PlayerRestter : MonoBehaviour
     {
         playerObject = GameObject.FindGameObjectWithTag("Player");
         playerObject.GetComponent<Rigidbody2D>().isKinematic = true;
-        playerObject.transform.position = new Vector3(0, 0, 0);
-        playerObject.transform.localScale = new Vector3(3, 3, 3);
+        playerObject.transform.position = new Vector3(-0.36f, 1.71f, 0);
+        playerObject.transform.localScale = new Vector3(4.5f, 4.5f, 4.5f);
     }
 
     public void ResetPlayer()

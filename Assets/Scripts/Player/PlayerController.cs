@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     public static int direction = 1;
     Rigidbody2D rigid2D;
     AudioSource aud;
+    public GameObject player;
+    private Animator playerAnimator;
+    
 
     [Header("効果音")]
     public AudioClip getSE;
@@ -41,6 +44,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        playerAnimator = player.GetComponent<Animator>();
+
         this.aud = GetComponent<AudioSource>();
         rigid2D = GetComponent<Rigidbody2D>();
         //タニス追記：服とポイントの辞書型定義
@@ -62,6 +67,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.I.gameState == GameState.GAMEOVER)
+        {
+            playerAnimator.SetBool("stopAnimation", !playerAnimator.GetBool("stopAnimation"));
+            return;
+        }
+
+
         if(GameManager.I.gameState == GameState.PLAY)
         {
 

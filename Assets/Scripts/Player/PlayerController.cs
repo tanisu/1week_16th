@@ -48,6 +48,15 @@ public class PlayerController : MonoBehaviour
         {
             Flip();
         }
+
+        //タニス追記：温度MAXの処理
+        //服が脱げる
+        if (UIController.isMaxOndo && touchedCloth != null && touchedCloth.activeSelf == true)
+        {
+            UIController.isMaxOndo = false;
+            touchedCloth.SetActive(false);
+            DropCloth(touchedCloth);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

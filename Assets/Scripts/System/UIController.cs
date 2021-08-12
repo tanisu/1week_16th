@@ -16,6 +16,7 @@ public class UIController : MonoBehaviour
     [SerializeField] float downSpeed;
     Tween tw;
     bool isRestart = false;
+    public static bool isMaxOndo = false;
 
 
     public void UpdateText(int clothCount)
@@ -42,7 +43,7 @@ public class UIController : MonoBehaviour
                 .OnComplete(() =>
                 {
                     //????????
-                    GameManager.I.DelCloth(1);
+                    isMaxOndo = true;
                     //?Q?[?W????????
                     ondoImage.DOFillAmount(0f, downSpeed)
                     .SetEase(Ease.OutSine)

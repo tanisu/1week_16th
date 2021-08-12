@@ -13,10 +13,6 @@ public class PlayerController : MonoBehaviour
     AudioSource aud;
     public GameObject player;
     private Animator playerAnimator;
-    
-
-    public GameObject player;
-    Animator playerAnimator;
 
     [Header("効果音")]
     public AudioClip getSE;
@@ -75,19 +71,6 @@ public class PlayerController : MonoBehaviour
         if(GameManager.I.gameState == GameState.GAMEOVER)
         {
             playerAnimator.SetBool("stopAnimation", !playerAnimator.GetBool("stopAnimation"));
-            return;
-        }
-
-
-        if(GameManager.I.gameState == GameState.PLAY)
-        {
-
-            playerAnimator.SetBool("animationStop", !playerAnimator.GetBool("animationStop"));
-
-            float z = player.transform.rotation.z;
-            player.transform.Rotate(0, 0, -z);
-
-            player.transform.localRotation = Quaternion.Euler(0, 0, 0);
             return;
         }
 

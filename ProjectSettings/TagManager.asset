@@ -13,6 +13,8 @@ TagManager:
   - Suit
   - Parker
   - Scarf
+  - Sun
+  - CloudH
   layers:
   - Default
   - TransparentFX

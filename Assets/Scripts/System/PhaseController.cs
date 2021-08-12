@@ -13,6 +13,7 @@ public class PhaseController : MonoBehaviour
     [SerializeField] GameObject[] phaseCharacters;
     PhaseObjController sun; 
     PhaseObjController kitakaze;
+    public static bool sunMoveX = false;
     private void Start()
     {
         sun = phaseCharacters[0].GetComponent<PhaseObjController>();
@@ -36,8 +37,9 @@ public class PhaseController : MonoBehaviour
         });
         phaseCharacters[0].transform.DOMoveY(1.7f, 5f).OnComplete(() =>
             {
-                phaseCharacters[0].transform.DOMoveX(sun.endX, 11.59f).OnComplete(()=> {
-                    phaseCharacters[0].transform.DOMoveX(-10f, 13.3f);
+                sunMoveX = true;
+                phaseCharacters[0].transform.DOMoveX(sun.endX, 10.59f).OnComplete(()=> {
+                    phaseCharacters[0].transform.DOMoveX(-10f, 10.3f);
                 });
             }
         );
@@ -58,17 +60,12 @@ public class PhaseController : MonoBehaviour
 
     public void BothPhase()
     {
-        //phaseBG[1].SetActive(true);
-        //sp[1].DOFade(phaseBGAlpha[1],0.2f);
-        //phaseBG[0].transform.DOMoveX(0, IN_OUT_TIME);
-        //phaseBG[1].transform.DOMoveX(9, IN_OUT_TIME);
-        
 
-        Tween tw =  phaseCharacters[1].transform.DOMoveX(5f, IN_OUT_TIME).OnComplete(()=> {
+        phaseCharacters[1].transform.DOMoveX(5f, IN_OUT_TIME).OnComplete(()=> {
             phaseCharacters[1].transform.DOMoveX(kitakaze.endX, 5f).SetLoops(-1, LoopType.Yoyo).SetLink(phaseCharacters[1].gameObject);
         }
         );
-        Tween tw_1 =  phaseCharacters[0].transform.DOMoveX(-5f, IN_OUT_TIME).OnComplete(()=> {
+        phaseCharacters[0].transform.DOMoveX(-5f, IN_OUT_TIME).OnComplete(()=> {
             phaseCharacters[0].transform.DOMoveX(5, 5f).SetLoops(-1, LoopType.Yoyo).SetLink(phaseCharacters[0].gameObject);
         });
         if(GameManager.I.gameState == GameState.GAMEOVER)

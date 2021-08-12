@@ -41,38 +41,38 @@ public class UIController : MonoBehaviour
 
     public void UpdateAddClothView(GameObject cloth)
     {
-        GameObject tmpObj = cloth;
-        getClothes.Add(tmpObj);
-        Image tmpImage = Instantiate(clothImage);
-        Debug.Log(tmpImage.transform);
-        tmpImage.sprite = cloth.GetComponent<SpriteRenderer>().sprite;
+        //GameObject tmpObj = cloth;
+        //getClothes.Add(tmpObj);
+        //Image tmpImage = Instantiate(clothImage);
         
-        ViewImages.Insert(0,tmpImage.GetComponent<Image>());
-        UpdateClotheVeiw();
+        //tmpImage.sprite = cloth.GetComponent<SpriteRenderer>().sprite;
+        
+        //ViewImages.Insert(0,tmpImage.GetComponent<Image>());
+        //UpdateClotheVeiw();
     }
     public void UpdateDelClothView()
     {
-        if(getClothes.Count() > 0)
-        {
-            getClothes.Remove(getClothes.Last());
-            ViewImages.Remove(ViewImages.Last());
-            for(int i = 0;i < clothesPanel.transform.childCount; i++)
-            {
-                if(i == (clothesPanel.transform.childCount - 1))
-                {
-                    clothesPanel.transform.GetChild(i);
-                }
-            }
-            //UpdateClotheVeiw();
-        }
+        //if(getClothes.Count() > 0)
+        //{
+        //    getClothes.Remove(getClothes.Last());
+        //    ViewImages.Remove(ViewImages.Last());
+        //    for(int i = 0;i < clothesPanel.transform.childCount; i++)
+        //    {
+        //        if(i == (clothesPanel.transform.childCount - 1))
+        //        {
+        //            clothesPanel.transform.GetChild(i);
+        //        }
+        //    }
+        //    //UpdateClotheVeiw();
+        //}
     }
 
     void UpdateClotheVeiw()
     {
-        foreach(Image i in ViewImages)
-        {
-            i.transform.SetParent(clothesPanel.transform,false);
-        }
+        //foreach(Image i in ViewImages)
+        //{
+        //    //i.transform.SetParent(clothesPanel.transform,false);
+        //}
     }
 
     public void UpdateOndo(bool isUp)

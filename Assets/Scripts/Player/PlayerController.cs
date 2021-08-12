@@ -39,8 +39,6 @@ public class PlayerController : MonoBehaviour
     /*リスト宣言*/
     private List<GameObject> getClothes;
 
-    private GameState gameState;
-
     void Start()
     {
         this.aud = GetComponent<AudioSource>();
@@ -64,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(gameState == GameState.PLAY)
+        if(GameManager.I.gameState == GameState.PLAY)
         {
 
             Move();

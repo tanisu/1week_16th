@@ -25,7 +25,18 @@ public class ClothesGenerator : MonoBehaviour
             int generateDice;
             generateDice = Random.Range(0, 11);
 
-            if(second < 40) // ゲーム開始40秒までは、80%：落ちてくる服、20％：横からの服
+            if(second < 30) // ゲーム開始30秒までは、落ちてくる服:90%、横からの服:10%
+            {
+                if (generateDice < 10)
+                {
+                    GenerateFallCloth();
+                }
+                else if (10 <= generateDice && generateDice < 11)
+                {
+                    GenerateSideCloth();
+                }
+            }
+            else if(30 <= second && second < 60)// ゲーム開始後30秒をすぎれば、落ちてくる服:80%、横からの服:20%
             {
                 if (generateDice < 9)
                 {
@@ -36,7 +47,7 @@ public class ClothesGenerator : MonoBehaviour
                     GenerateSideCloth();
                 }
             }
-            else if(40 <= second)// ゲーム開始後40秒をすぎれば、60%：落ちてくる服、40%：横からの服
+            else if (60 <= second)// ゲーム開始後60秒をすぎれば、落ちてくる服:60%、横からの服:40%
             {
                 if (generateDice < 7)
                 {
@@ -47,6 +58,7 @@ public class ClothesGenerator : MonoBehaviour
                     GenerateSideCloth();
                 }
             }
+
             delta = 0;
         }
 
@@ -58,16 +70,16 @@ public class ClothesGenerator : MonoBehaviour
         int fallDice;
         fallDice = Random.Range(0, 11);
 
-        // 50% コート, 30% スカーフ, 20%　パーカー
-        if(fallDice < 6)
+        // 40% コート, 30% スカーフ, 30%　パーカー
+        if(fallDice < 5)
         {
             clothes = Instantiate(coatPrefab) as GameObject;
         }
-        else if(6 <= fallDice && fallDice < 9)
+        else if(5 <= fallDice && fallDice < 8)
         {
             clothes = Instantiate(skarfPrefab) as GameObject;
         }
-        else if(9 <= fallDice)
+        else if(8 <= fallDice)
         {
             clothes = Instantiate(parkerPrefab) as GameObject;
         }

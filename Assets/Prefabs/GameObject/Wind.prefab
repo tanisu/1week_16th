@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27230ca0fe1034ed5a87599bcc00f838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementTime: 3
-  vanishTime: 2
-  scaleValue: 2
-  scaleChangeTime: 2
+  movementTime: 2
+  vanishTime: 3
+  scaleValue: 1.75
+  scaleChangeTime: 1.75

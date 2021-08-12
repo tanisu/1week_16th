@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
     public GameObject player;
     private Animator playerAnimator;
 
+    //一番上の服。
+    public static GameObject topCloth;
+    
+
     [Header("効果音")]
     public AudioClip getSE;
     public AudioClip dropSE;
@@ -25,12 +29,19 @@ public class PlayerController : MonoBehaviour
     public GameObject parker;
     public GameObject scarf;
 
-    [Header("画像")]
+    [Header("飛び出る服")]
     public GameObject spacesuitSprite;
     public GameObject coatSprite;
     public GameObject suitSprite;
     public GameObject parkerSprite;
     public GameObject scarfSprite;
+
+    [Header("一番上の服(力技)")]
+    public GameObject spacesuitTopSprite;
+    public GameObject coatTopSprite;
+    public GameObject suitTopSprite;
+    public GameObject parkerTopSprite;
+    public GameObject scarfTopSprite;
 
     public GameObject sweatSprite;
 
@@ -44,8 +55,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerAnimator = player.GetComponent<Animator>();
-
-
 
         this.aud = GetComponent<AudioSource>();
         rigid2D = GetComponent<Rigidbody2D>();
@@ -63,7 +72,6 @@ public class PlayerController : MonoBehaviour
         getClothes = new List<GameObject>();
 
         DontDestroyOnLoad(gameObject);
-
     }
 
     void Update()
@@ -81,6 +89,9 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
+        UpdateClothInf();
+
+
         /*
         //タニス追記：温度MAXの処理
         //服が脱げる(最後に着た服が脱げる。服が脱げた後に次の服を切る前にもう一度ゲージがマックスになれば、次に服をとった瞬間その服が脱げる）
@@ -95,15 +106,13 @@ public class PlayerController : MonoBehaviour
         //服が脱げる（最後に着た服が脱げる。服が脱げた後に次の服を切る前にもう一度ゲージがマックスになれば、服が脱げるエフェクトは発生せず−１点）
         if (UIController.isMaxOndo)
         {
-            if (touchedCloth != null && touchedCloth.activeSelf == true)
+            if (topCloth != null)
             {
-                touchedCloth.SetActive(false);
-                DropCloth(touchedCloth);
+                InActiveCloth(topCloth);
+                DropCloth(topCloth);
             }
             else
             {
-                //1点マイナス
-                GameManager.I.DelCloth(1);
                 this.aud.PlayOneShot(this.dropSE);
 
                 //汗がでる
@@ -122,16 +131,11 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-
         //タニス追記：太陽フェーズの当たり判定
         if (other.CompareTag("PhaseBlock") || other.CompareTag("Shadow"))
         {
             return;
         }
-
-
-
-
 
         //触れた服を反映
         //タニス追記：風の当たり判定除外
@@ -143,16 +147,14 @@ public class PlayerController : MonoBehaviour
         //風弾に触れるとスコアマイナス
         if (other.gameObject.tag == "Wind")
         {
-            //最後に来た服が脱げる服が脱げる
-            if (touchedCloth != null && touchedCloth.activeSelf == true)
+            //最後に来た服から順番に脱げる
+            if (topCloth != null)
             {
-                touchedCloth.SetActive(false);
-                DropCloth(touchedCloth);
+                InActiveCloth(topCloth);
+                DropCloth(topCloth);
             }
             else //2連続の場合は汗が出て１点マイナス
             {
-                //1点マイナス
-                GameManager.I.DelCloth(1);
                 this.aud.PlayOneShot(this.dropSE);
 
                 //汗がでる
@@ -160,7 +162,6 @@ public class PlayerController : MonoBehaviour
                 sp.transform.position = gameObject.transform.position;
             }
         }
-
         //触れたオブジェクトの破壊
         Destroy(other.gameObject);
     }
@@ -211,6 +212,9 @@ public class PlayerController : MonoBehaviour
         GameManager.I.DelClothObj();
         sp.transform.position = gameObject.transform.position;
 
+        //リストから1つ減らす。
+        getClothes.RemoveAt(getClothes.Count - 1);
+
         this.aud.PlayOneShot(this.dropSE);
     }
 
@@ -255,8 +259,6 @@ public class PlayerController : MonoBehaviour
 
         getClothes.Add(touchedCloth);
 
-        Debug.Log(getClothes.Count);
-
         this.aud.PlayOneShot(this.getSE);
 
         //タニス追記：服による加点処理
@@ -269,4 +271,88 @@ public class PlayerController : MonoBehaviour
             touchedCloth.SetActive(true);
         }
     }
-}
+
+    public void UpdateClothInf()
+    {
+        //リストの一番最後の服を代入。未取得であればnull
+        if (1 <= getClothes.Count)
+        {
+            topCloth = getClothes[getClothes.Count - 1];
+        }
+        else
+        {
+            topCloth = null;
+        }
+        UpDateTopClothSprite();
+    }
+
+    //力技で一番上の服の表示を調整
+    void UpDateTopClothSprite()
+    {
+        coatTopSprite.SetActive(false);
+        scarfTopSprite.SetActive(false);
+        parkerTopSprite.SetActive(false);
+        suitTopSprite.SetActive(false);
+        spacesuitTopSprite.SetActive(false);
+
+        if (topCloth == null)
+        {
+            return;
+        }
+
+        if (coatTopSprite.tag == topCloth.tag)
+        {
+            coatTopSprite.SetActive(true);
+        }
+        else if (scarfTopSprite.tag == topCloth.tag)
+        {
+            scarfTopSprite.SetActive(true);
+        }
+        else if (parkerTopSprite.tag == topCloth.tag)
+        {
+            parkerTopSprite.SetActive(true);
+        }
+        else if (suitTopSprite.tag == topCloth.tag)
+        {
+            suitTopSprite.SetActive(true);
+        }
+        else if (spacesuitTopSprite.tag == topCloth.tag)
+        {
+            spacesuitTopSprite.SetActive(true);
+        }
+    }
+
+    public void InActiveCloth(GameObject other)
+    {
+        GameObject inActiveCloth = null;
+
+        if (other.gameObject.tag == "Coat")
+        {
+            inActiveCloth = coat;
+        }
+
+        if (other.gameObject.tag == "Scarf")
+        {
+            inActiveCloth = scarf;
+        }
+
+        if (other.gameObject.tag == "Parker")
+        {
+            inActiveCloth = parker;
+        }
+
+        if (other.gameObject.tag == "Suit")
+        {
+            inActiveCloth = suit;
+        }
+
+        if (other.gameObject.tag == "Spacesuit")
+        {
+            inActiveCloth = spacesuit;
+        }
+
+        inActiveCloth.SetActive(false);
+    }
+
+
+    }

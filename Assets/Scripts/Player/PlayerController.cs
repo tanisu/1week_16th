@@ -9,7 +9,13 @@ public class PlayerController : MonoBehaviour
     public float limitSpeed = 10f;
     public static int direction = 1;
     Rigidbody2D rigid2D;
+    AudioSource aud;
 
+    [Header("効果音")]
+    public AudioClip getSE;
+    public AudioClip dropSE;
+
+    [Header("服")]
     public GameObject spacesuit;
     public GameObject coat;
     public GameObject suit;
@@ -23,11 +29,14 @@ public class PlayerController : MonoBehaviour
     public GameObject parkerSprite;
     public GameObject scarfSprite;
 
+    public GameObject sweatSprite;
+
     private GameObject touchedCloth;
     //タニス追記：服とポイントの辞書型宣言
     private Dictionary<string, int> clothPoint;
     void Start()
     {
+        this.aud = GetComponent<AudioSource>();
         rigid2D = GetComponent<Rigidbody2D>();
         //タニス追記：服とポイントの辞書型定義
         clothPoint = new Dictionary<string, int>()
@@ -49,13 +58,37 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
+
+        /*
         //タニス追記：温度MAXの処理
-        //服が脱げる
+        //服が脱げる(最後に着た服が脱げる。服が脱げた後に次の服を切る前にもう一度ゲージがマックスになれば、次に服をとった瞬間その服が脱げる）
         if (UIController.isMaxOndo && touchedCloth != null && touchedCloth.activeSelf == true)
         {
             UIController.isMaxOndo = false;
             touchedCloth.SetActive(false);
             DropCloth(touchedCloth);
+        }
+        */
+       
+        //服が脱げる（最後に着た服が脱げる。服が脱げた後に次の服を切る前にもう一度ゲージがマックスになれば、服が脱げるエフェクトは発生せず−１点）
+        if (UIController.isMaxOndo)
+        {
+            if(touchedCloth != null && touchedCloth.activeSelf == true)
+            {
+                touchedCloth.SetActive(false);
+                DropCloth(touchedCloth);
+            }
+            else
+            {
+                //1点マイナス
+                GameManager.I.DelCloth(1);
+                this.aud.PlayOneShot(this.dropSE);
+
+                //汗がでる
+                GameObject sp = Instantiate(sweatSprite) as GameObject;
+                sp.transform.position = gameObject.transform.position;
+            }
+            UIController.isMaxOndo = false;
         }
     }
 
@@ -78,12 +111,21 @@ public class PlayerController : MonoBehaviour
         //風弾に触れるとスコアマイナス
         if (other.gameObject.tag == "Wind")
         {
-
-            //服が脱げる
+            //最後に来た服が脱げる服が脱げる
             if (touchedCloth != null && touchedCloth.activeSelf == true)
             {
                 touchedCloth.SetActive(false);
                 DropCloth(touchedCloth);
+            }
+            else //2連続の場合は汗が出て１点マイナス
+            {
+                //1点マイナス
+                GameManager.I.DelCloth(1);
+                this.aud.PlayOneShot(this.dropSE);
+
+                //汗がでる
+                GameObject sp = Instantiate(sweatSprite) as GameObject;
+                sp.transform.position = gameObject.transform.position;
             }
         }
 
@@ -134,6 +176,8 @@ public class PlayerController : MonoBehaviour
         //タニス追記：服による減点処理
         GameManager.I.DelCloth(clothPoint[other.gameObject.tag]);
         sp.transform.position = gameObject.transform.position;
+
+        this.aud.PlayOneShot(this.dropSE);
     }
 
     //左右反転
@@ -169,6 +213,8 @@ public class PlayerController : MonoBehaviour
         {
             touchedCloth = spacesuit;
         }
+
+        this.aud.PlayOneShot(this.getSE);
 
         //タニス追記：服による加点処理
         GameManager.I.GetCloth(clothPoint[other.gameObject.tag]);

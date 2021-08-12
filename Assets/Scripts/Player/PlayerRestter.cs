@@ -19,5 +19,4 @@ public class PlayerRestter : MonoBehaviour
         Destroy(playerObject);
     }
 
-
 }

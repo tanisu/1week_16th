@@ -21,21 +21,18 @@ public class ShadowController : MonoBehaviour
         {
             sp.color = new Color(1,1,1,alpha) ;
         }
-        if(GameManager.I.phaseState == PhaseState.BOTH)
-        {
-            gameObject.SetActive(false);
-        }
+
 
         float x = tfs[0].position.x - tfs[1].position.x;
         
-        if(x < 0)
-        {
+        //if(x < 0)
+        //{
             transform.localPosition = new Vector3(x, transform.localPosition.y, transform.localPosition.z);
             if(Mathf.Abs(x) > 1 && transform.localScale.x < maxScaleX)
             {
                 transform.localScale += new Vector3(0.005f, 0f, 0f);
             }
-        }
+        //}
         
     }
 

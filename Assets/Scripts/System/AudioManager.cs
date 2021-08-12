@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -26,6 +26,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         audioSources = GetComponents<AudioSource>();
+        audioSources[1].loop = true;
     }
 
 

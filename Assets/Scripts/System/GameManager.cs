@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     private float startTime = 1.0f;
 
-    private GameState gameState;
+    public GameState gameState { get; private set; }
     public PhaseState phaseState { get; private set; }
 
     private void Awake()
@@ -117,11 +117,11 @@ public class GameManager : MonoBehaviour
 
     public void GetClothObj(GameObject cloth)
     {
-        Debug.Log(cloth);
+        ui.UpdateAddClothView(cloth);
     }
     public void DelClothObj()
     {
-        Debug.Log("Del");
+        ui.UpdateDelClothView();
     }
     
     public void ChangeState(GameState state)

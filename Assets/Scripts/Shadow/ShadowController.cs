@@ -7,8 +7,10 @@ public class ShadowController : MonoBehaviour
     [SerializeField] Transform[] tfs;
     public float maxScaleX = 1.76f;
     public static bool isPlayerSafe = false;
+    
     SpriteRenderer sp;
     float alpha = 0.6f;
+    
     private void Start()
     {
         sp = GetComponent<SpriteRenderer>();
@@ -25,13 +27,21 @@ public class ShadowController : MonoBehaviour
 
         float x = tfs[0].position.x - tfs[1].position.x;
         
-        //if(x < 0)
-        //{
-            transform.localPosition = new Vector3(x, transform.localPosition.y, transform.localPosition.z);
-            if(Mathf.Abs(x) > 1 && transform.localScale.x < maxScaleX)
-            {
-                transform.localScale += new Vector3(0.005f, 0f, 0f);
-            }
+        if (PhaseController.sunMoveX && tfs[0].GetComponent<CloudController>().overMe )
+        {
+            
+            
+                transform.localPosition = new Vector3(x, transform.localPosition.y, transform.localPosition.z);
+            
+            
+
+            //影巨大化一旦消す
+            //if (Mathf.Abs(x) > 1 && transform.localScale.x < maxScaleX)
+            //{
+            //    transform.localScale += new Vector3(0.005f, 0f, 0f);
+            //}
+        }
+
         //}
         
     }

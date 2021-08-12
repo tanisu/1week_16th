@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rigid2D;
     AudioSource aud;
 
+    public GameObject player;
+    Animator playerAnimator;
+
     [Header("効果音")]
     public AudioClip getSE;
     public AudioClip dropSE;
@@ -41,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        playerAnimator = player.GetComponent<Animator>();
         this.aud = GetComponent<AudioSource>();
         rigid2D = GetComponent<Rigidbody2D>();
         //タニス追記：服とポイントの辞書型定義
@@ -62,60 +66,78 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.I.gameState == GameState.PLAY)
+
+        //ゲームオーバ時にアニメーションを停止し、リターン
+        if(GameManager.I.gameState == GameState.GAMEOVER)
         {
 
-            Move();
+            playerAnimator.SetBool("animationStop", !playerAnimator.GetBool("animationStop"));
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Flip();
-            }
+            float z = player.transform.rotation.z;
+            player.transform.Rotate(0, 0, -z);
 
-            /*
-            //タニス追記：温度MAXの処理
-            //服が脱げる(最後に着た服が脱げる。服が脱げた後に次の服を切る前にもう一度ゲージがマックスになれば、次に服をとった瞬間その服が脱げる）
-            if (UIController.isMaxOndo && touchedCloth != null && touchedCloth.activeSelf == true)
+            player.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            return;
+        }
+
+        Move();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Flip();
+        }
+
+        /*
+        //タニス追記：温度MAXの処理
+        //服が脱げる(最後に着た服が脱げる。服が脱げた後に次の服を切る前にもう一度ゲージがマックスになれば、次に服をとった瞬間その服が脱げる）
+        if (UIController.isMaxOndo && touchedCloth != null && touchedCloth.activeSelf == true)
+        {
+            UIController.isMaxOndo = false;
+            touchedCloth.SetActive(false);
+            DropCloth(touchedCloth);
+        }
+        */
+
+        //服が脱げる（最後に着た服が脱げる。服が脱げた後に次の服を切る前にもう一度ゲージがマックスになれば、服が脱げるエフェクトは発生せず−１点）
+        if (UIController.isMaxOndo)
+        {
+            if (touchedCloth != null && touchedCloth.activeSelf == true)
             {
-                UIController.isMaxOndo = false;
                 touchedCloth.SetActive(false);
                 DropCloth(touchedCloth);
             }
-            */
-
-            //服が脱げる（最後に着た服が脱げる。服が脱げた後に次の服を切る前にもう一度ゲージがマックスになれば、服が脱げるエフェクトは発生せず−１点）
-            if (UIController.isMaxOndo)
+            else
             {
-                if (touchedCloth != null && touchedCloth.activeSelf == true)
-                {
-                    touchedCloth.SetActive(false);
-                    DropCloth(touchedCloth);
-                }
-                else
-                {
-                    //1点マイナス
-                    GameManager.I.DelCloth(1);
-                    this.aud.PlayOneShot(this.dropSE);
+                //1点マイナス
+                GameManager.I.DelCloth(1);
+                this.aud.PlayOneShot(this.dropSE);
 
-                    //汗がでる
-                    GameObject sp = Instantiate(sweatSprite) as GameObject;
-                    sp.transform.position = gameObject.transform.position;
-                }
-                UIController.isMaxOndo = false;
+                //汗がでる
+                GameObject sp = Instantiate(sweatSprite) as GameObject;
+                sp.transform.position = gameObject.transform.position;
             }
+            UIController.isMaxOndo = false;
         }
-
 
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (GameManager.I.gameState == GameState.GAMEOVER)
+        {
+            return;
+        }
+
 
         //タニス追記：太陽フェーズの当たり判定
         if (other.CompareTag("PhaseBlock") || other.CompareTag("Shadow"))
         {
             return;
         }
+
+
+
+
 
         //触れた服を反映
         //タニス追記：風の当たり判定除外

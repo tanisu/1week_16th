@@ -14,6 +14,7 @@ public class PhaseController : MonoBehaviour
     PhaseObjController sun; 
     PhaseObjController kitakaze;
     public static bool sunMoveX = false;
+    Tween[] tw = new Tween[2];
     private void Start()
     {
         sun = phaseCharacters[0].GetComponent<PhaseObjController>();
@@ -60,20 +61,23 @@ public class PhaseController : MonoBehaviour
 
     public void BothPhase()
     {
-
+        
         phaseCharacters[1].transform.DOMoveX(5f, IN_OUT_TIME).OnComplete(()=> {
-            phaseCharacters[1].transform.DOMoveX(kitakaze.endX, 5f).SetLoops(-1, LoopType.Yoyo).SetLink(phaseCharacters[1].gameObject);
+            tw[0] =  phaseCharacters[1].transform.DOMoveX(kitakaze.endX, 5f).SetLoops(-1, LoopType.Yoyo).SetLink(phaseCharacters[1].gameObject);
         }
         );
         phaseCharacters[0].transform.DOMoveX(-5f, IN_OUT_TIME).OnComplete(()=> {
-            phaseCharacters[0].transform.DOMoveX(5, 5f).SetLoops(-1, LoopType.Yoyo).SetLink(phaseCharacters[0].gameObject);
+            tw[1] = phaseCharacters[0].transform.DOMoveX(5, 5f).SetLoops(-1, LoopType.Yoyo).SetLink(phaseCharacters[0].gameObject);
         });
-        if(GameManager.I.gameState == GameState.GAMEOVER)
-        {
 
-        }
+    }
 
-
+    public void BothEnd()
+    {
+        
+        tw[0].Pause();
+        tw[1].Pause();
+        
     }
 
 

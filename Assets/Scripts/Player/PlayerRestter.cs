@@ -9,9 +9,12 @@ public class PlayerRestter : MonoBehaviour
     private void Start()
     {
         playerObject = GameObject.FindGameObjectWithTag("Player");
-        playerObject.GetComponent<Rigidbody2D>().isKinematic = true;
-        playerObject.transform.position = new Vector3(-0.36f, 1.71f, 0);
-        playerObject.transform.localScale = new Vector3(4.5f, 4.5f, 4.5f);
+        if(playerObject != null)
+        {
+            playerObject.GetComponent<Rigidbody2D>().isKinematic = true;
+            playerObject.transform.position = new Vector3(-0.36f, 1.71f, 0);
+            playerObject.transform.localScale = new Vector3(4.5f, 4.5f, 4.5f);
+        }
     }
 
     public void ResetPlayer()

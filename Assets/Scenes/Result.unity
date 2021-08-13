@@ -239,6 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 656500224}
   - component: {fileID: 656500223}
+  - component: {fileID: 656500225}
   m_Layer: 0
   m_Name: kitakaze
   m_TagString: Untagged
@@ -305,12 +306,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 656500222}
   m_LocalRotation: {x: -0, y: -0, z: -0.12703726, w: 0.991898}
-  m_LocalPosition: {x: -6.48, y: 3.760905, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -7.05, y: 3.88, z: 0}
+  m_LocalScale: {x: 1.2462, y: 1.2462, z: 1.2462}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -14.597}
+--- !u!114 &656500225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656500222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff6ec8c52a01c4ddea0099557e9cfe5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDistance: 1
+  moveTime: 0.2
+  backTime: 1.5
+  moveY: -0.25
 --- !u!1001 &922239172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -619,6 +636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1154915611}
   - component: {fileID: 1154915610}
+  - component: {fileID: 1154915612}
   m_Layer: 0
   m_Name: sun
   m_TagString: Untagged
@@ -685,12 +703,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1154915609}
   m_LocalRotation: {x: -0, y: -0, z: 0.28934228, w: 0.95722574}
-  m_LocalPosition: {x: 6.53, y: 3.78, z: 0}
-  m_LocalScale: {x: 1.0689241, y: 1.1007639, z: 1.1749}
+  m_LocalPosition: {x: 7.5194, y: 4.0236, z: 0}
+  m_LocalScale: {x: 1.2815903, y: 1.1919752, z: 1.1749}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 33.637}
+--- !u!114 &1154915612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154915609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff6ec8c52a01c4ddea0099557e9cfe5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDistance: 1
+  moveTime: 0.2
+  backTime: 1.5
+  moveY: -0.25
 --- !u!1 &1649133052
 GameObject:
   m_ObjectHideFlags: 0

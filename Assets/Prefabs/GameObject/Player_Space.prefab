@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aceleration: 15
-  limitSpeed: 2
+  limitSpeed: 3
   player: {fileID: 6596678487756282961}
   getSE: {fileID: 8300000, guid: cb51805b604d44d8892702dda905d36d, type: 3}
   dropSE: {fileID: 8300000, guid: 074d7f80e6ca941c197dc84f93f4a469, type: 3}

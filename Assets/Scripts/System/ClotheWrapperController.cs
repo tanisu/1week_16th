@@ -20,30 +20,32 @@ public class ClotheWrapperController : MonoBehaviour
 
     public void ViewCloth(string clothTag)
     {
-        foreach(GameObject cloth in getClothes)
+        foreach (GameObject cloth in getClothes)
         {
             if (cloth.CompareTag(clothTag))
             {
                 GameObject tmp = Instantiate(cloth);
-                tmp.transform.SetParent(transform,false);
-                
+                tmp.transform.SetParent(transform, false);
+
+
                 if (count > 0 && count % maxItem == 0)
                 {
                     rowCount++;
+
                 }
                 float y = 1f + (rowPos * rowCount);
                 if (clothTag == "Suit")
                 {
                     y = 11f + (rowPos * rowCount); ;
-                } 
-                if(clothTag == "Spacesuit")
+                }
+                if (clothTag == "Spacesuit")
                 {
                     y = 8f + (rowPos * rowCount); ;
                 }
                 tmp.transform.localPosition = new Vector3(count % maxItem * diff, y, 1f);
                 count++;
                 tmp.GetComponent<SpriteRenderer>().sortingOrder = count;
-                
+
                 currentCloth.Add(tmp);
             }
         }
@@ -51,25 +53,18 @@ public class ClotheWrapperController : MonoBehaviour
 
     public void HideCloth()
     {
-        
-        if(currentCloth.Count > 0)
+
+        if (currentCloth.Count > 0)
         {
             GameObject tmp = currentCloth.Last();
             currentCloth.Remove(currentCloth.Last());
             Destroy(tmp);
             count--;
-            if(rowCount > 0 && count < maxItem)
+            if (rowCount > 0 && count % maxItem == 0)
             {
                 rowCount--;
             }
-            //if (rowCount > 0 && count % maxItem == maxItem)
-            //{
-            //    rowCount--;
-            //}
-
-
         }
-
 
     }
 }

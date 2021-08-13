@@ -62,9 +62,14 @@ public class ClotheWrapperController : MonoBehaviour
             {
                 rowCount--;
             }
-            
+            //if (rowCount > 0 && count % maxItem == maxItem)
+            //{
+            //    rowCount--;
+            //}
+
+
         }
-        
-        
+
+
     }
 }

@@ -29,7 +29,8 @@ public class UIController : MonoBehaviour
 
     public void UpdateText(int clothCount)
     {
-        clothesText.text = $"服：{clothCount}枚";
+        //clothesText.text = $"服：{clothCount}枚";
+        clothesText.text = clothCount.ToString("D3");
     }
 
     public void UpdateTimer(float timer)
